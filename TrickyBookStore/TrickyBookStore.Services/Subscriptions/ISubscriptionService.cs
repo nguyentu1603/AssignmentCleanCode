@@ -6,5 +6,6 @@ namespace TrickyBookStore.Services.Subscriptions
     public interface ISubscriptionService
     {
         IList<Subscription> GetSubscriptions(params int[] ids);
+        double GetTotalSubcriptionPrice(List<Subscription> subscriptions);
     }
 }
