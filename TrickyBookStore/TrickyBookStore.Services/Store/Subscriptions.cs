@@ -7,7 +7,7 @@ namespace TrickyBookStore.Services.Store
     {
         public static readonly IEnumerable<Subscription> Data = new List<Subscription>
         {
-             new Subscription { Id = 2, SubscriptionType = SubscriptionTypes.Free, Priority = 1,
+            new Subscription { Id = 2, SubscriptionType = SubscriptionTypes.Free, Priority = 1,
                 PriceDetails = new Dictionary<string, double>
                 {
                     {"FixPrice", 0 },
@@ -41,7 +41,7 @@ namespace TrickyBookStore.Services.Store
                     {"FixPrice", 75 },
                     {"OldBookDiscountPercent", 100 },
                     {"NewBookDiscountPercent", 15 },
-                    {"DiscountedBooks", 3 }         
+                    {"DiscountedBooks", 3 }
                 },
                 BookCategoryId = 2
             },

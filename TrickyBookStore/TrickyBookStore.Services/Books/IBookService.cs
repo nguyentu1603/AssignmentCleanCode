@@ -6,6 +6,6 @@ namespace TrickyBookStore.Services.Books
 {
     public interface IBookService
     {
-        IList<Book> GetBooks(params long[] ids);
+        IList<Book> GetBooks(List<PurchaseTransaction> purchaseTransactions);
     }
 }
