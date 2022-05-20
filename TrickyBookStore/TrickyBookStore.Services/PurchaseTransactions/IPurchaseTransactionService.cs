@@ -9,6 +9,5 @@ namespace TrickyBookStore.Services.PurchaseTransactions
     {
         IList<PurchaseTransaction> GetPurchaseTransactions(long customerId, DateTimeOffset fromDate, DateTimeOffset toDate);
         double GetTotalReceipt(List<Book> books, List<Subscription> subscriptions);
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TrickyBookStore.Models;
 
@@ -16,6 +17,14 @@ namespace TrickyBookStore.Services.Books
                 {
                     books.Add(book);
                 }
+            }
+            Console.WriteLine("List of Books in Purchase Transaction");
+            int i = 1;
+            foreach (var book in books)
+            {
+                var status = book.IsOld ? "Old" : "New";
+                Console.WriteLine($" #{i} Book Id:{book.Id} - Title: {book.Title} [{status}] - $Price: {book.Price} - Category: {book.CategoryId}");
+                i++;
             }
             return books;
         }

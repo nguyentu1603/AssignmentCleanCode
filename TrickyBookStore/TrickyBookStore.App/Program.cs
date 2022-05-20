@@ -13,11 +13,19 @@ namespace TrickyBookStore.App
                 .AddServices()
                 .BuildServiceProvider();
 
-            DateTimeOffset startDate = new DateTimeOffset(new DateTime(2018, 2, 1));
-            DateTimeOffset endDate = new DateTimeOffset(new DateTime(2018, 2, 28));
+            Console.WriteLine("TrickBookStore");
+            Console.Write("Input Customer Id: ");
+            int customerId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input Month: ");
+            int month = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input Year: ");
+            int year = Convert.ToInt32(Console.ReadLine());
+
+            DateTimeOffset startDate = new DateTimeOffset(new DateTime(year, month, 1));
+            DateTimeOffset endDate = new DateTimeOffset(new DateTime(year, month, 28));
 
             var paymentService = serviceProvider.GetService<IPaymentService>();
-            double paymentAmount = paymentService.GetPaymentAmount(1, startDate, endDate);
+            double paymentAmount = paymentService.GetPaymentAmount(customerId, startDate, endDate);
             Console.WriteLine("Payment Amount: " + paymentAmount);
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-// KeepIt
+﻿// KeepIt
 namespace TrickyBookStore.Models
 {
     public class Book
@@ -14,7 +8,6 @@ namespace TrickyBookStore.Models
         public double Price { get; set; }
         public bool IsOld { get; set; }
         public int CategoryId { get; set; }
-
         public BookCategory Category { get; set; }
     }
 }
