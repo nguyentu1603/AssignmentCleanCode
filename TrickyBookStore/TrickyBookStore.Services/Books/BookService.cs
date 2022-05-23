@@ -23,7 +23,7 @@ namespace TrickyBookStore.Services.Books
             foreach (var book in books)
             {
                 var status = book.IsOld ? "Old" : "New";
-                Console.WriteLine($" #{i} Book Id:{book.Id} - Title: {book.Title} [{status}] - $Price: {book.Price} - Category: {book.CategoryId}");
+                Console.WriteLine($" #{i} Book: {book.Title} [{status}] - $Price: {book.Price} - Category: {book.CategoryId}");
                 i++;
             }
             return books;
