@@ -21,11 +21,11 @@ namespace TrickyBookStore.App
             Console.Write("Input Year: ");
             int year = Convert.ToInt32(Console.ReadLine());
 
-            DateTimeOffset startDate = new DateTimeOffset(new DateTime(year, month, 1));
-            DateTimeOffset endDate = new DateTimeOffset(new DateTime(year, month, 28));
+            DateTimeOffset fromDate = new DateTimeOffset(new DateTime(year, month, 1));
+            DateTimeOffset toDate = new DateTimeOffset(new DateTime(year, month, 28));
 
             var paymentService = serviceProvider.GetService<IPaymentService>();
-            double paymentAmount = paymentService.GetPaymentAmount(customerId, startDate, endDate);
+            double paymentAmount = paymentService.GetPaymentAmount(customerId, fromDate, toDate);
             Console.WriteLine("Payment Amount: " + paymentAmount);
         }
     }

@@ -23,15 +23,7 @@ namespace TrickyBookStore.Services.PurchaseTransactions
 
         public double GetTotalReceipt(List<Book> books, List<Subscription> subscriptions)
         {
-            double totalReceiptPrice = 0;
-            if (subscriptions == null)
-            {
-                foreach (var book in books)
-                {
-                    totalReceiptPrice += book.Price;
-                }
-                return totalReceiptPrice;
-            }
+            double totalReceiptPrice = 0, totalOldBookPrice = 0, totalNewBookPrice = 0;
             List<Book> oldBooks = new List<Book>();
             List<Book> newBooks = new List<Book>();
             foreach (var book in books)
@@ -45,8 +37,19 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                     newBooks.Add(book);
                 }
             }
-            double totalOldBookPrice = GetTotalPriceOfOldBooks(oldBooks, subscriptions);
-            double totalNewBookPrice = GetTotalPriceOfNewBooks(newBooks, subscriptions);
+            if (subscriptions == null)
+            {
+                foreach (var book in books)
+                {
+                    totalReceiptPrice += book.Price;
+                }
+                return totalReceiptPrice;
+            }
+            else
+            {
+                totalOldBookPrice = GetTotalPriceOfOldBooks(oldBooks, subscriptions);
+                totalNewBookPrice = GetTotalPriceOfNewBooks(newBooks, subscriptions);
+            }
             totalReceiptPrice = totalOldBookPrice + totalNewBookPrice;
             Console.WriteLine($"Total Receipt: {totalReceiptPrice}");
             return totalReceiptPrice;
@@ -62,9 +65,9 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 bool isCalculated = false;
                 foreach (var subscription in subscriptions)
                 {
-                    var subscriptionAddicted = subscriptions.FirstOrDefault(x => x.BookCategoryId == book.CategoryId);
-                    if (subscriptionAddicted != null)
+                    if (subscription.BookCategoryId == book.CategoryId)
                     {
+                        discountedPrice = (book.Price * subscription.PriceDetails["OldBookDiscountPercent"] / 100);
                         totalPrice += 0;
                         isCalculated = true;
                         Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
