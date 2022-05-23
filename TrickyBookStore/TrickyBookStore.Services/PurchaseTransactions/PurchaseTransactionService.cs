@@ -83,8 +83,9 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 }
                 if (!isCalculated)
                 {
-                    totalPrice += book.Price;
-                    Console.WriteLine($"Book: {book.Title} - Price: {book.Price}");
+                    discountedPrice = (book.Price * 10 / 100);
+                    totalPrice += book.Price - discountedPrice;
+                    Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
                 }
             }
             return totalPrice;
