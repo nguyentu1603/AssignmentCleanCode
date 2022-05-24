@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using TrickyBookStore.Models;
-using TrickyBookStore.Services.Helpers;
+using TrickyBookStore.Repositories.Helpers;
 
 namespace TrickyBookStore.Repositories.Store
 {

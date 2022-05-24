@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrickyBookStore.Models", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrickyBookStore.App", "TrickyBookStore.App\TrickyBookStore.App.csproj", "{E93948C1-515E-41D6-ADCD-C2B029C0BECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrickyBookStore.Repositories", "TrickyBookStore.Repositories\TrickyBookStore.Repositories.csproj", "{33750BC0-CE52-4AC7-93ED-3E36B00E11E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrickyBookStore.Repositories", "TrickyBookStore.Repositories\TrickyBookStore.Repositories.csproj", "{33750BC0-CE52-4AC7-93ED-3E36B00E11E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

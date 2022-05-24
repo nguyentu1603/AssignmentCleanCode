@@ -60,17 +60,11 @@
     <Compile Include="ConfigureServices.cs" />
     <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="Customers\ICustomerService.cs" />
-    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Payment\IPaymentService.cs" />
     <Compile Include="Payment\PaymentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseTransactions\IPurchaseTransactionService.cs" />
     <Compile Include="PurchaseTransactions\PurchaseTransactionService.cs" />
-    <Compile Include="Store\BookCategories.cs" />
-    <Compile Include="Store\Books.cs" />
-    <Compile Include="Store\Customers.cs" />
-    <Compile Include="Store\PurchaseTransactions.cs" />
-    <Compile Include="Store\Subscriptions.cs" />
     <Compile Include="Subscriptions\ISubscriptionService.cs" />
     <Compile Include="Subscriptions\SubscriptionService.cs" />
   </ItemGroup>
@@ -85,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

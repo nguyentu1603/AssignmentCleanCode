@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TrickyBookStore.Models;
 
-namespace TrickyBookStore.Services.PurchaseTransactions
+namespace TrickyBookStore.Repositories.PurchaseTransactions
 {
-    // KeepIt
-    public interface IPurchaseTransactionService
+    public interface IPurchaseTransactionRepository
     {
         IList<PurchaseTransaction> GetPurchaseTransactions(long customerId, DateTimeOffset fromDate, DateTimeOffset toDate);
     }

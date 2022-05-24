@@ -30,16 +30,7 @@ namespace TrickyBookStore.Services.Payment
 
         public double GetPaymentAmount(long customerId, DateTimeOffset fromDate, DateTimeOffset toDate)
         {
-            Customer customer = CustomerService.GetCustomerById(customerId);
-
-            IList<PurchaseTransaction> listPurchase = PurchaseTransactionService.GetPurchaseTransactions(customerId, fromDate, toDate);
-            IList<Subscription> listSubcription = SubscriptionService.GetSubscriptions(customer.SubscriptionIds.ToArray());
-            IList<Book> listBook = BookService.GetBooks(listPurchase.Select(x => x.BookId).ToArray());
-
-            double receiptPrice = PurchaseTransactionService.GetTotalReceipt(listBook.ToList(), listSubcription.ToList());
-            double subscriptionPrice = SubscriptionService.GetTotalSubcriptionPrice(listSubcription.ToList());
-            double totalPrice = subscriptionPrice + receiptPrice;
-            return totalPrice;
+            return 0;
         }
     }
 }

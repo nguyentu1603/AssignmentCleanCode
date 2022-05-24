@@ -16,10 +16,7 @@ namespace TrickyBookStore.Services.Customers
 
         public Customer GetCustomerById(long id)
         {
-            Customer customer = Store.Customers.Data.FirstOrDefault(x => x.Id == id);
-            if (customer == null)
-                return null;    
-            return customer;
+            return null;
         }
     }
 }
