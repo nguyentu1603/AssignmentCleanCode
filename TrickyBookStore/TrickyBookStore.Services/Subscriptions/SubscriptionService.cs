@@ -18,11 +18,6 @@ namespace TrickyBookStore.Services.Subscriptions
                     subscriptions.Add(subscription);
                 }
             }
-            Console.WriteLine("Subscriptions of Customer:");
-            foreach (var subscription in subscriptions)
-            {
-                Console.WriteLine($"Type: {subscription.SubscriptionType} {subscription.BookCategoryId} - $:{subscription.PriceDetails["FixPrice"]}");
-            }
             // Priority: Premium > Category Addicted > Paid > Free
             return subscriptions.OrderByDescending(x => x.Priority).ToList();
         }
@@ -34,7 +29,6 @@ namespace TrickyBookStore.Services.Subscriptions
             {
                 totalPrice += subscription.PriceDetails["FixPrice"];
             }
-            Console.WriteLine($"Total Subcription Price: {totalPrice}");
             return totalPrice;
         }
     }

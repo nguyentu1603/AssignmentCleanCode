@@ -19,6 +19,13 @@ namespace TrickyBookStore.Services.PurchaseTransactions
         {
             List<PurchaseTransaction> purchaseTransactions = new List<PurchaseTransaction>();
             purchaseTransactions = Store.PurchaseTransactions.Data.Where(x => x.CustomerId == customerId && x.CreatedDate >= fromDate && x.CreatedDate <= toDate).ToList();
+            if(purchaseTransactions != null)
+            {
+                foreach (var purchaseTransaction in purchaseTransactions)
+                {
+                    purchaseTransaction.Book = BookService.GetBooks(purchaseTransaction.BookId).FirstOrDefault();
+                }
+            }
             return purchaseTransactions;
         }
 

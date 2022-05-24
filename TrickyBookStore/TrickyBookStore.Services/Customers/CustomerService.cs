@@ -17,8 +17,10 @@ namespace TrickyBookStore.Services.Customers
         public Customer GetCustomerById(long id)
         {
             Customer customer = Store.Customers.Data.FirstOrDefault(x => x.Id == id);
-            if (customer == null)
-                return null;    
+            if(customer != null)
+            {
+                customer.Subscriptions = SubscriptionService.GetSubscriptions(customer.SubscriptionIds.ToArray());
+            }
             return customer;
         }
     }
