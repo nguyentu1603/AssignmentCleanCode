@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TrickyBookStore.Models;
 using TrickyBookStore.Services.Books;
+using TrickyBookStore.Services.Helpers;
 
 namespace TrickyBookStore.Services.PurchaseTransactions
 {
@@ -24,42 +25,24 @@ namespace TrickyBookStore.Services.PurchaseTransactions
         public double GetTotalReceipt(List<Book> books, List<Subscription> subscriptions)
         {
             double totalReceiptPrice = 0, totalOldBookPrice = 0, totalNewBookPrice = 0;
-            List<Book> oldBooks = new List<Book>();
-            List<Book> newBooks = new List<Book>();
-            foreach (var book in books)
-            {
-                if (book.IsOld)
-                {
-                    oldBooks.Add(book);
-                }
-                else
-                {
-                    newBooks.Add(book);
-                }
-            }
             if (subscriptions == null)
             {
-                foreach (var book in books)
-                {
-                    totalReceiptPrice += book.Price;
-                }
+                totalReceiptPrice = books.Select(x => x.Price).Sum();
                 return totalReceiptPrice;
             }
             else
             {
-                totalOldBookPrice = GetTotalPriceOfOldBooks(oldBooks, subscriptions);
-                totalNewBookPrice = GetTotalPriceOfNewBooks(newBooks, subscriptions);
+                totalOldBookPrice = GetTotalPriceOfOldBooks(books.Where(x => x.IsOld).ToList(), subscriptions);
+                totalNewBookPrice = GetTotalPriceOfNewBooks(books.Where(x => !x.IsOld).ToList(), subscriptions);
             }
             totalReceiptPrice = totalOldBookPrice + totalNewBookPrice;
-            Console.WriteLine($"Total Receipt: {totalReceiptPrice}");
             return totalReceiptPrice;
         }
 
 
         public double GetTotalPriceOfOldBooks(List<Book> books, List<Subscription> subscriptions)
         {
-            double totalPrice = 0, discountedPrice = 0;
-            Console.WriteLine("Calculate Total Price of Old Books");
+            double totalPrice = 0;
             foreach (var book in books)
             {
                 bool isCalculated = false;
@@ -67,17 +50,13 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 {
                     if (subscription.BookCategoryId == book.CategoryId)
                     {
-                        discountedPrice = (book.Price * subscription.PriceDetails["OldBookDiscountPercent"] / 100);
                         totalPrice += 0;
                         isCalculated = true;
-                        Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
                     }
                     if (subscription.BookCategoryId == null)
                     {
-                        discountedPrice = (book.Price * subscription.PriceDetails["OldBookDiscountPercent"] / 100);
-                        totalPrice += book.Price - discountedPrice;
+                        totalPrice += book.Price - (book.Price * subscription.PriceDetails[Constants.PriceDetailKeys.OldBookDiscountPercent] / 100);
                         isCalculated = true;
-                        Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
                     }
                     if (isCalculated)
                     {
@@ -86,9 +65,7 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 }
                 if (!isCalculated)
                 {
-                    discountedPrice = (book.Price * 10 / 100);
-                    totalPrice += book.Price - discountedPrice;
-                    Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
+                    totalPrice += book.Price - (book.Price * 10 / 100);
                 }
             }
             return totalPrice;
@@ -96,8 +73,7 @@ namespace TrickyBookStore.Services.PurchaseTransactions
 
         public double GetTotalPriceOfNewBooks(List<Book> books, List<Subscription> subscriptions)
         {
-            double totalPrice = 0, discountedPrice = 0;
-            Console.WriteLine("Calculate Total Price of New Books");
+            double totalPrice = 0;
             foreach (var book in books)
             {
                 bool isCalculated = false;
@@ -105,24 +81,20 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 {
                     if (subscription.BookCategoryId == book.CategoryId)
                     {
-                        if (subscription.PriceDetails["DiscountedBooks"] > 0)
+                        if (subscription.PriceDetails[Constants.PriceDetailKeys.DiscountedNewBooks] > 0)
                         {
-                            discountedPrice = book.Price * subscription.PriceDetails["NewBookDiscountPercent"] / 100;
-                            totalPrice += book.Price - discountedPrice;
-                            subscription.PriceDetails["DiscountedBooks"]--;
+                            totalPrice += book.Price - (book.Price * subscription.PriceDetails[Constants.PriceDetailKeys.NewBookDiscountPercent] / 100);
+                            subscription.PriceDetails[Constants.PriceDetailKeys.DiscountedNewBooks]--;
                             isCalculated = true;
-                            Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
                         }
                     }
                     if (subscription.BookCategoryId == null)
                     {
-                        if (subscription.PriceDetails["DiscountedBooks"] > 0)
+                        if (subscription.PriceDetails[Constants.PriceDetailKeys.DiscountedNewBooks] > 0)
                         {
-                            discountedPrice = book.Price * subscription.PriceDetails["NewBookDiscountPercent"] / 100;
-                            totalPrice += book.Price - discountedPrice;
-                            subscription.PriceDetails["DiscountedBooks"]--;
+                            totalPrice += book.Price - (book.Price * subscription.PriceDetails[Constants.PriceDetailKeys.NewBookDiscountPercent] / 100);
+                            subscription.PriceDetails[Constants.PriceDetailKeys.DiscountedNewBooks]--;
                             isCalculated = true;
-                            Console.WriteLine($"Book: {book.Title} - Discount: {discountedPrice} => Price: {book.Price - discountedPrice}");
                         }
                     }
                     if (isCalculated)
@@ -133,7 +105,6 @@ namespace TrickyBookStore.Services.PurchaseTransactions
                 if (!isCalculated)
                 {
                     totalPrice += book.Price;
-                    Console.WriteLine($"Book: {book.Title} - Price: {book.Price}");
                 }
             }
             return totalPrice;

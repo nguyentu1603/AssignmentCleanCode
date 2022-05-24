@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TrickyBookStore.Models;
 
-namespace TrickyBookStore.Services.Books
+namespace TrickyBookStore.Repositories.Books
 {
-    internal class BookService : IBookService
+    public class BookRepository : IBookRepository
     {
         public IList<Book> GetBooks(long[] ids)
         {
@@ -17,7 +19,7 @@ namespace TrickyBookStore.Services.Books
                 {
                     books.Add(book);
                 }
-            }      
+            }
             return books;
         }
     }

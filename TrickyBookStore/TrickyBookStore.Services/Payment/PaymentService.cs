@@ -34,7 +34,7 @@ namespace TrickyBookStore.Services.Payment
 
             IList<PurchaseTransaction> listPurchase = PurchaseTransactionService.GetPurchaseTransactions(customerId, fromDate, toDate);
             IList<Subscription> listSubcription = SubscriptionService.GetSubscriptions(customer.SubscriptionIds.ToArray());
-            IList<Book> listBook = BookService.GetBooks(listPurchase.ToList());
+            IList<Book> listBook = BookService.GetBooks(listPurchase.Select(x => x.BookId).ToArray());
 
             double receiptPrice = PurchaseTransactionService.GetTotalReceipt(listBook.ToList(), listSubcription.ToList());
             double subscriptionPrice = SubscriptionService.GetTotalSubcriptionPrice(listSubcription.ToList());

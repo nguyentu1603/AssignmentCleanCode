@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using TrickyBookStore.Models;
 
-// KeepIt
-namespace TrickyBookStore.Services.Books
+namespace TrickyBookStore.Repositories.Books
 {
-    public interface IBookService
+    public interface IBookRepository
     {
         IList<Book> GetBooks(params long[] ids);
     }

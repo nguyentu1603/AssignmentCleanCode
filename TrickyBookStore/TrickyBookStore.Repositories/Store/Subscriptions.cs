@@ -2,7 +2,7 @@
 using TrickyBookStore.Models;
 using TrickyBookStore.Services.Helpers;
 
-namespace TrickyBookStore.Services.Store
+namespace TrickyBookStore.Repositories.Store
 {
     public static class Subscriptions
     {
